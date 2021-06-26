@@ -8,44 +8,20 @@ Explanation: The answer is "abc", with the length of 3.
 */
 
 var lengthOfLongestSubstring = function(s) {
-    var arr = s.split("");
-    for(var i=0; i<arr.length; i++){
-        var test = arr[i];
-        for(var j=i+1; j<arr.length; j++){
-            if(test === arr[j]){
-                arr.splice(j,1);
-            }
-        }
-    }
- 
-    for(var b=0; b<arr.length; b++){
-            var test2 = arr[b];
-            for(var c=b+1; c<arr.length; c++){
-                if(test2 === arr[c]){
-                    arr.splice(c,1);
-                }
-               
-            }
-        }
-      return (arr.length);
-    }
+    let mp = {};      //declaring an object
+    let l = ans = 0;    // l = left   ans = answer
+    
+    for (let r = 0; r < s.length; r++) {     //loop throw the string   r = right
+        const curr = s[r];                   // curr = current character in the string
+        
+        if (mp[curr]) {                     //finding if the current character is already in the object
+            l = Math.max(l, mp[curr])       //if it is alraedy in the object change the left to the bigger number 
+        };                                  //and thats by finding maximum num between the old l and the value of the
+                                            //old current key in the object 
 
-    // var count = 0;
-    // var s2 = s.split("");
-    // for(var l=s2.length-1; l>=0; l--){
-    //     var start = s2[l];
-    //     count += 1; 
-    //     for(var i= 0; i<s2.length; i++){
-    //         if(start === s2[i]){
-    //             s2.splice(i,1)
-    //         }
-    //         if (s2.splice(i,1)){
-    //             for(var i= 0; i<s2.length; i++){
-    //               if(start === s2[i]){
-    //                s2.splice(i,1)
-    //              }
-    //             }
-    //         }
-    //     }
-    // }
-    // return count;
+        mp[curr] = r + 1;                  //putting the key,value in the object 
+        ans = Math.max(ans, r - l + 1);     //answer will be the maximum number 
+    }
+    
+    return ans;
+};
