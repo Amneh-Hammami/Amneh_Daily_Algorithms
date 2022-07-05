@@ -36,7 +36,6 @@ class LinkedList{
         }else{
         //if yes ==> loop through the linkedList until reach the tail then add the node 
             var currentNode = this.head;
-            currentNode.next = new Node(item);
             while(currentNode.next){
                 currentNode = currentNode.next;
             }
